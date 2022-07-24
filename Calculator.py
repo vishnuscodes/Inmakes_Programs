@@ -22,7 +22,7 @@ def clear_content():
     field.delete('1.0', END)
 
 window = Tk()
-window.geometry("300x300")
+window.geometry("300x322")
 field = tk.Text(window,height=2,width=37,font=("Times New Roman",12))
 field.grid(row=1,column=1,columnspan=4)
 
@@ -71,8 +71,11 @@ buttondot.grid(row=5,column=2,sticky="nsew")
 buttoncalc = Button(window, text = "=", height= 3, width=1, command = calculatefield)
 buttoncalc.grid(row=5,column=3,sticky="nsew")
 
+buttondivide = Button(window, text = "/", height= 3, width=1, command = lambda: add_to_field("/"))
+buttondivide.grid(row=5,column=4,sticky="nsew")
+
 buttonclear = Button(window, text = "Clear", height= 3, width=1, command = clear_content)
-buttonclear.grid(row=5,column=4,sticky="nsew")
+buttonclear.grid(row=6,column=1,sticky="nsew",columnspan=4)
 
 window.mainloop()
 
