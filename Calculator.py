@@ -3,6 +3,8 @@ import tkinter as tk
 
 field_text = ""
 
+
+
 def add_to_field(sth):
     global field_text
     field_text=field_text+str(sth)
@@ -21,7 +23,14 @@ def clear_content():
     field_text = ""
     field.delete('1.0', END)
 
+def backspace():
+    global field_text
+    field_text = field_text[:-1]
+    field.delete("1.0",END)
+    field.insert("1.0",field_text)
+
 window = Tk()
+window.title("My Calculator")
 window.geometry("300x322")
 field = tk.Text(window,height=2,width=37,font=("Times New Roman",12))
 field.grid(row=1,column=1,columnspan=4)
@@ -74,8 +83,11 @@ buttoncalc.grid(row=5,column=3,sticky="nsew")
 buttondivide = Button(window, text = "/", height= 3, width=1, command = lambda: add_to_field("/"))
 buttondivide.grid(row=5,column=4,sticky="nsew")
 
+buttonbackspace = Button(window, text = "<<", height= 3, width=1, command = backspace)
+buttonbackspace.grid(row=6,column=4,sticky="nsew")
+
 buttonclear = Button(window, text = "Clear", height= 3, width=1, command = clear_content)
-buttonclear.grid(row=6,column=1,sticky="nsew",columnspan=4)
+buttonclear.grid(row=6,column=1,sticky="nsew",columnspan=3)
 
 window.mainloop()
 
