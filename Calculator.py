@@ -29,6 +29,8 @@ def backspace():
     field.delete("1.0",END)
     field.insert("1.0",field_text)
 
+    #no text
+
 window = Tk()
 window.title("My Calculator")
 window.geometry("300x322")
