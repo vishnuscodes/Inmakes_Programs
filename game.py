@@ -68,9 +68,60 @@ class human_player(TicTacToe):
                 user_input = self.get_computer_input()
 
 
+    def find_winner(self,turn):
+        if self.board['7'] == self.board['8'] == self.board['9'] != ' ':  # across the top
+            # self.print_board()
+            print("\nGame Over.\n")
+            print(" **** " + turn + " won. ****")
+            winner = True
+            return winner
+        elif self.board['4'] == self.board['5'] == self.board['6'] != ' ':  # across the middle
+            # self.print_board()
+            print("\nGame Over.\n")
+            print(" **** " + turn + " won. ****")
+            winner = True
+            return winner
+        elif self.board['1'] == self.board['2'] == self.board['3'] != ' ':  # across the bottom
+            # self.print_board()
+            print("\nGame Over.\n")
+            print(" **** " + turn + " won. ****")
+            winner = True
+            return winner
+        elif self.board['1'] == self.board['4'] == self.board['7'] != ' ':  # down the left side
+            # self.print_board()
+            print("\nGame Over.\n")
+            print(" **** " + turn + " won. ****")
+            winner = True
+            return winner
+        elif self.board['2'] == self.board['5'] == self.board['8'] != ' ':  # down the middle
+            # self.print_board()
+            print("\nGame Over.\n")
+            print(" **** " + turn + " won. ****")
+            winner = True
+            return winner
+        elif self.board['3'] == self.board['6'] == self.board['9'] != ' ':  # down the right side
+            # self.print_board()
+            print("\nGame Over.\n")
+            print(" **** " + turn + " won. ****")
+            winner = True
+            return winner
+        elif self.board['7'] == self.board['5'] == self.board['3'] != ' ':  # diagonal
+            # self.print_board()
+            print("\nGame Over.\n")
+            print(" **** " + turn + " won. ****")
+            winner = True
+            return winner
+        elif self.board['1'] == self.board['5'] == self.board['9'] != ' ':  # diagonal
+            # self.print_board()
+            print("\nGame Over.\n")
+            print(" **** " + turn + " won. ****")
+            winner = True
+            return winner
+
+
 
 tk = TicTacToe()
-hp = human_player()
+
 
 comp_inp_list = []
 # def get_user_input():
@@ -90,7 +141,7 @@ comp_inp_list = []
 
 print("Assume you are X, O is played by the computer")
 starter = ""
-
+hp = human_player()
 while starter != "X" or starter != "O":
     starter = str(input("Who wants to start X or O?"))
     if starter == "X" or starter == "O":
@@ -98,24 +149,46 @@ while starter != "X" or starter != "O":
 
 turns = 1
 
+result = False
+
 while turns<10:
     if starter == "X":
         if turns%2 != 0:
             print("Xs turn")
             inp = hp.get_user_input()
             hp.human_player_turn(inp)
+            result = hp.find_winner("X")
+            if result is True:
+                break
             turns = turns + 1
         else:
             print("Os turn")
             cp_inp = hp.get_computer_input()
+            whose_turn = "O"
             hp.computer_turn(cp_inp)
+            result = hp.find_winner("O")
+            if result is True:
+                break
             turns = turns+1
-
 
     else:
         if turns % 2 != 0:
             print("Os turn")
+            cp_inp = hp.get_computer_input()
+            hp.computer_turn(cp_inp)
+            result = hp.find_winner("O")
+            if result is True:
+                break
             turns = turns + 1
+
         else:
             print("Xs turn")
+            inp = hp.get_user_input()
+            hp.human_player_turn(inp)
+            result = hp.find_winner("X")
+            if result is True:
+                break
             turns = turns + 1
+
+if turns == 10:
+    print("It is a tie")
